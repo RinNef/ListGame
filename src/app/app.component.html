@@ -1,484 +1,80 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- Slide Menu-->
+<aside class="side-menu__container" [ngClass]="{'side-menu__container-active': showMenu}" (click)="toggleMenu()">
+  <nav class="slide-menu" [ngClass]="{'slide-menu-active': showMenu}" (click)="$event.stopImmediatePropagation();">
+      <section class="menu-header">
+          <span class="greeting__text">Welcome Back</span>
+          <div class="profile-image__container">
+              <img src="data:image/jpeg;base64,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" alt="profile-image"
+                   class="profile__image">
+          </div>
+          <div class="account-details">
+              <span class="name__text">Thuận Trần</span>
+              <span class="email__text">tranchithuan2001@gmail.com</span>
+          </div>
+      </section>
+      <section class="menu-body">
+        <app-search-bar></app-search-bar>
+      </section>
+      <section class="menu-footer">
 
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+      </section>
+  </nav>
+  </aside>
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
+  <div class="root__container" >
+      <header [ngClass]="{'main__header-dark': darkModeActive}" class="main__header">
 
-  p {
-    margin: 0;
-  }
+          <div class="left__section">
 
-  .spacer {
-    flex: 1;
-  }
+            <svg (click)="toggleMenu()" class="hamburger__icon" id="Menu_Burger_Icon" data-name="Menu Burger Icon"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16" >
+                <!-- hamburger icon svg code goes here-->
 
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
+                <!-- <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/> -->
 
-  .toolbar img {
-    margin: 0 16px;
-  }
 
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
+            </svg>
+            <a href="#">
+            <svg class="logo__icon" viewBox="150.3 22.2 213.7 42.8">
+                              <path fill="#00ff9b" d="M150.3 65V22.2L193 65z" data-name="Path 1"/>
+                              <path fill="#003eff" d="M193.1 65h-42.8L193 22.2z" data-name="Path 2"/>
+                              <text class="logo__text" fill="#432c85" font-family="SegoeUI-Semibold,Segoe UI" font-size="30" font-weight="600" letter-spacing=".1em" transform="translate(237 56)">
+                              <tspan x="0" y="0">Rin</tspan>
+                              </text>
+                              </svg>
+              </a>
 
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
 
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
+          </div>
 
-  .content {
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
+          <h2 class="date__text">List Games</h2>
 
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
 
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
+          <div class="mode-toggle__container">
+              <span class="mode-toggle__text">Light</span>
 
-  .card svg.material-icons path {
-    fill: #888;
-  }
+              <label class="toggle-button__container">
+                  <input (click)="modeToggleSwitch()" type="checkbox" class="mode-toggle__input" />
+                    <span [ngClass]="{'mode-toggle__bg-checked': darkModeActive}" class="mode-toggle__bg"></span>
+                    <span [ngClass]="{'mode-toggle__circle-checked': darkModeActive}" class="mode-toggle__circle"></span>
+              </label>
 
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
 
-  .card {
-    all: unset;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
+              <span class="mode-toggle__text">Dark</span>
+          </div>
 
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
+      </header>
 
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
+      <!-- Main Content -->
 
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
+      <!--<router-outlet></router-outlet>-->
+      <main class="main__container container">
+          <div class="main-container__bg" [ngClass]="{'main-container__bg-dark': darkModeActive}"></div>
+          <router-outlet></router-outlet>
+      </main>
 
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
+      <!-- Footer -->
 
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
-
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Welcome</span>
-    <div class="spacer"></div>
-    <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
-      <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-        <rect width="400" height="400" fill="none"/>
-        <path d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23" fill="#fff"/>
-      </svg>
-    </a>
-    <a aria-label="Angular on YouTube" target="_blank" rel="noopener" href="https://youtube.com/angular" title="YouTube">
-      <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
-        <path d="M0 0h24v24H0V0z" fill="none"/>
-        <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
-      </svg>
-    </a>
-</div>
-
-<div class="content" role="main">
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-
-    <svg id="rocket" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
-      <title>Rocket Ship</title>
-      <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#dd0031"/>
-        <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
-          <path id="Path_33" data-name="Path 33" d="M3.4,42.615a3.084,3.084,0,0,0,3.553,3.553,21.419,21.419,0,0,0,12.215-6.107L9.511,30.4A21.419,21.419,0,0,0,3.4,42.615Z" transform="translate(0.371 3.363)" fill="#fff"/>
-          <path id="Path_34" data-name="Path 34" d="M53.3,3.221A3.09,3.09,0,0,0,50.081,0,48.227,48.227,0,0,0,18.322,13.437c-6-1.666-14.991-1.221-18.322,7.218A33.892,33.892,0,0,1,9.439,25.1l-.333.666a3.013,3.013,0,0,0,.555,3.553L23.985,43.641a2.9,2.9,0,0,0,3.553.555l.666-.333A33.892,33.892,0,0,1,32.647,53.3c8.55-3.664,8.884-12.326,7.218-18.322A48.227,48.227,0,0,0,53.3,3.221ZM34.424,9.772a6.439,6.439,0,1,1,9.106,9.106,6.368,6.368,0,0,1-9.106,0A6.467,6.467,0,0,1,34.424,9.772Z" transform="translate(0 0.005)" fill="#fff"/>
-        </g>
-      </g>
-    </svg>
-
-    <span>{{ title }} app is running!</span>
-
-    <svg id="rocket-smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
-      <title>Rocket Ship Smoke</title>
-      <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
-    </svg>
-
+      <footer class="main__footer">
+          <small class="copyright__text">Copyright ©2022 Rin</small>
+      </footer>
   </div>
-
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-      <span>Learn Angular</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-      <span>CLI Documentation</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://material.angular.io">
-      <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px" width="21.813" height="23.453" viewBox="0 0 179.2 192.7"><path fill="#ffa726" d="M89.4 0 0 32l13.5 118.4 75.9 42.3 76-42.3L179.2 32 89.4 0z"/><path fill="#fb8c00" d="M89.4 0v192.7l76-42.3L179.2 32 89.4 0z"/><path fill="#ffe0b2" d="m102.9 146.3-63.3-30.5 36.3-22.4 63.7 30.6-36.7 22.3z"/><path fill="#fff3e0" d="M102.9 122.8 39.6 92.2l36.3-22.3 63.7 30.6-36.7 22.3z"/><path fill="#fff" d="M102.9 99.3 39.6 68.7l36.3-22.4 63.7 30.6-36.7 22.4z"/></svg>
-      <span>Angular Material</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-      <span>Angular Blog</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/devtools/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M14.73,13.31C15.52,12.24,16,10.93,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.43,0,2.74-0.48,3.81-1.27L19.59,21L21,19.59L14.73,13.31z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5S14,7.01,14,9.5 S11.99,14,9.5,14z"/><polygon points="10.29,8.44 9.5,6 8.71,8.44 6.25,8.44 8.26,10.03 7.49,12.5 9.5,10.97 11.51,12.5 10.74,10.03 12.75,8.44"/></g></g></svg>
-      <span>Angular DevTools</span>
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  <div class="card-container">
-    <button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>New Component</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Angular Material</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add PWA Support</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Add Dependency</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Run and Watch Tests</span>
-    </button>
-
-    <button class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span>Build for Production</span>
-    </button>
-  </div>
-
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>ng generate component xyz</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build</pre>
-  </div>
-
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
-        <title>Meetup Logo</title>
-        <path id="logo--mSwarm" d="M21.221,14.95A4.393,4.393,0,0,1,17.6,19.281a4.452,4.452,0,0,1-.8.069c-.09,0-.125.035-.154.117a2.939,2.939,0,0,1-2.506,2.091,2.868,2.868,0,0,1-2.248-.624.168.168,0,0,0-.245-.005,3.926,3.926,0,0,1-2.589.741,4.015,4.015,0,0,1-3.7-3.347,2.7,2.7,0,0,1-.043-.38c0-.106-.042-.146-.143-.166a3.524,3.524,0,0,1-1.516-.69A3.623,3.623,0,0,1,2.23,14.557a3.66,3.66,0,0,1,1.077-3.085.138.138,0,0,0,.026-.2,3.348,3.348,0,0,1-.451-1.821,3.46,3.46,0,0,1,2.749-3.28.44.44,0,0,0,.355-.281,5.072,5.072,0,0,1,3.863-3,5.028,5.028,0,0,1,3.555.666.31.31,0,0,0,.271.03A4.5,4.5,0,0,1,18.3,4.7a4.4,4.4,0,0,1,1.334,2.751,3.658,3.658,0,0,1,.022.706.131.131,0,0,0,.1.157,2.432,2.432,0,0,1,1.574,1.645,2.464,2.464,0,0,1-.7,2.616c-.065.064-.051.1-.014.166A4.321,4.321,0,0,1,21.221,14.95ZM13.4,14.607a2.09,2.09,0,0,0,1.409,1.982,4.7,4.7,0,0,0,1.275.221,1.807,1.807,0,0,0,.9-.151.542.542,0,0,0,.321-.545.558.558,0,0,0-.359-.534,1.2,1.2,0,0,0-.254-.078c-.262-.047-.526-.086-.787-.138a.674.674,0,0,1-.617-.75,3.394,3.394,0,0,1,.218-1.109c.217-.658.509-1.286.79-1.918a15.609,15.609,0,0,0,.745-1.86,1.95,1.95,0,0,0,.06-1.073,1.286,1.286,0,0,0-1.051-1.033,1.977,1.977,0,0,0-1.521.2.339.339,0,0,1-.446-.042c-.1-.092-.2-.189-.307-.284a1.214,1.214,0,0,0-1.643-.061,7.563,7.563,0,0,1-.614.512A.588.588,0,0,1,10.883,8c-.215-.115-.437-.215-.659-.316a2.153,2.153,0,0,0-.695-.248A2.091,2.091,0,0,0,7.541,8.562a9.915,9.915,0,0,0-.405.986c-.559,1.545-1.015,3.123-1.487,4.7a1.528,1.528,0,0,0,.634,1.777,1.755,1.755,0,0,0,1.5.211,1.35,1.35,0,0,0,.824-.858c.543-1.281,1.032-2.584,1.55-3.875.142-.355.28-.712.432-1.064a.548.548,0,0,1,.851-.24.622.622,0,0,1,.185.539,2.161,2.161,0,0,1-.181.621c-.337.852-.68,1.7-1.018,2.552a2.564,2.564,0,0,0-.173.528.624.624,0,0,0,.333.71,1.073,1.073,0,0,0,.814.034,1.22,1.22,0,0,0,.657-.655q.758-1.488,1.511-2.978.35-.687.709-1.37a1.073,1.073,0,0,1,.357-.434.43.43,0,0,1,.463-.016.373.373,0,0,1,.153.387.7.7,0,0,1-.057.236c-.065.157-.127.316-.2.469-.42.883-.846,1.763-1.262,2.648A2.463,2.463,0,0,0,13.4,14.607Zm5.888,6.508a1.09,1.09,0,0,0-2.179.006,1.09,1.09,0,0,0,2.179-.006ZM1.028,12.139a1.038,1.038,0,1,0,.01-2.075,1.038,1.038,0,0,0-.01,2.075ZM13.782.528a1.027,1.027,0,1,0-.011,2.055A1.027,1.027,0,0,0,13.782.528ZM22.21,6.95a.882.882,0,0,0-1.763.011A.882.882,0,0,0,22.21,6.95ZM4.153,4.439a.785.785,0,1,0,.787-.78A.766.766,0,0,0,4.153,4.439Zm8.221,18.22a.676.676,0,1,0-.677.666A.671.671,0,0,0,12.374,22.658ZM22.872,12.2a.674.674,0,0,0-.665.665.656.656,0,0,0,.655.643.634.634,0,0,0,.655-.644A.654.654,0,0,0,22.872,12.2ZM7.171-.123A.546.546,0,0,0,6.613.43a.553.553,0,1,0,1.106,0A.539.539,0,0,0,7.171-.123ZM24.119,9.234a.507.507,0,0,0-.493.488.494.494,0,0,0,.494.494.48.48,0,0,0,.487-.483A.491.491,0,0,0,24.119,9.234Zm-19.454,9.7a.5.5,0,0,0-.488-.488.491.491,0,0,0-.487.5.483.483,0,0,0,.491.479A.49.49,0,0,0,4.665,18.936Z" transform="translate(0 0.123)" fill="#f64060"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Join the Conversation on Discord" href="https://discord.gg/angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 245 240">
-        <title>Discord Logo</title>
-        <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
-        <path d="M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3-18.5 12.8 11.9 12.1 11.2 21.5 19V40.6c0-11.4-9.2-20.6-20.5-20.6zm-38.6 130.6s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-2.3-.9-4.8-2-7.3-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.3-1.8-1-2.8-1.7-2.8-1.7s4.8 8 17.5 11.8c-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c10.7-4.7 19.2-6 22.7-6.3.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2z"/>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-      Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
-        <div class="github-star-badge">
-            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Star
-        </div>
-      </a>
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </a>
-  </footer>
-
-  <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <title>Gray Clouds Background</title>
-    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
-  </svg>
-
-</div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<router-outlet></router-outlet>

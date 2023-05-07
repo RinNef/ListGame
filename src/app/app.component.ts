@@ -6,5 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'Project';
+  showMenu: boolean = false;
+  darkModeActive:boolean=false;
+
+
+  modeToggleSwitch()
+  {
+    this.darkModeActive= !this.darkModeActive;
+  }
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+ }
+
 }
